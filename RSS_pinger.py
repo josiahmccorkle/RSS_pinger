@@ -1,6 +1,7 @@
 import time
 import requests
 import feedparser
+import rss_constants
 
 def fetch_rss_feed(url):
     try:
@@ -14,8 +15,8 @@ def fetch_rss_feed(url):
     except requests.RequestException as e:
         print(f"Error fetching RSS feed: {e}")
 
-RSS_FEED_URL = "https://www.mozilla.org/en-US/careers/feed/"  # Replace with a valid RSS feed URL
+RSS_FEED_URL = rss_constants.CAREERS_FEED  # Replace with a valid RSS feed URL
 
 while True:
     fetch_rss_feed(RSS_FEED_URL)
-    time.sleep(30)  # Wait for one hour before fetching again
+    time.sleep(rss_constants.DELAY_INTERVAL)  # Wait for one hour before fetching again
