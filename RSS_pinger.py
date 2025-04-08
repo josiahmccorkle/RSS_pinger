@@ -1,9 +1,9 @@
 import time
 import requests
 import feedparser
+from email_sender import sendEmail
 import rss_constants
 import secrets_file
-import smtplib
 from email.mime.text import MIMEText
 
 def fetch_rss_feed(url):
@@ -19,19 +19,12 @@ def fetch_rss_feed(url):
             # print(f"Link: {entry.link}\n")
             emailBody += f"{entry.title}\n{entry.link}\n\n"
 
-        try:
             msg = MIMEText(emailBody)
             msg["Subject"] = "Mozilla Positions"
             msg["From"] = secrets_file.EMAIL_ADDRESS
             msg["To"] = secrets_file.EMAIL_ADDRESS
 
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                # server.set_debuglevel(1)
-                server.login(secrets_file.EMAIL_ADDRESS, secrets_file.GMAIL_PASSWORD)
-                server.send_message(msg)
-                print("Email sent successfully!")
-        except Exception as e:
-            print(f"Failed to send email: {e}")
+        sendEmail(msg)
     except requests.RequestException as e:
         print(f"Error fetching RSS feed: {e}")
 
