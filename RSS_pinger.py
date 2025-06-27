@@ -27,18 +27,4 @@ def fetch_rss_feed(url):
         print(f"Error fetching RSS feed: {e}")
 
 RSS_FEED_URL = rss_constants.CAREERS_FEED
-
-while True:
-    fetch_rss_feed(RSS_FEED_URL)
-    time.sleep(rss_constants.DELAY_INTERVAL)
-
-    # timeToEmail = [7, 11, 3, 19]
-    # local_time = time.localtime().tm_hour
-    # fetch_rss_feed(RSS_FEED_URL)
-    # print(time.localtime().tm_hour, time.localtime().tm_min)
-
-
-
-    # if local_time in timeToEmail and time.localtime().tm_min == 0:
-    #     time.sleep(rss_constants.DELAY_INTERVAL)
-    #     fetch_rss_feed(RSS_FEED_URL)
+fetch_rss_feed(RSS_FEED_URL)
